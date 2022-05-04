@@ -28,9 +28,20 @@ const ToDoList = () => {
     }
 
     // updates a note, by changing the done property depending on the state of the checkbox
-    const onCheckbox = (event, note) => {
+    const onCheckbox = async (event, note) => {
         const isChecked = event.currentTarget.checked;
-        dispatch({ type: "update-note", payload: { ...note, done: isChecked } })
+
+        const noteUpdatedFromForm = { ...note, done: isChecked }
+
+        let noteUpdated = await fetch("http://localhost:8081/api/update/note", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(noteUpdatedFromForm)
+        }).then(response => response.json());
+
+        dispatch({ type: "update-note", payload: noteUpdated })
     }
 
     // this event triggers the remove-note case in the dispatcher, removing the note by id
