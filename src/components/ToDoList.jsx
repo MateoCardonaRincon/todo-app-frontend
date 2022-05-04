@@ -60,7 +60,7 @@ const ToDoList = () => {
 
     return (
         <div>
-            <h3>Pending tasks</h3>
+            <h1>List of Tasks</h1>
             <ul>
                 {state.listOfNotes.map(note => {
                     return <li className={"note " + (note.done ? "checked" : "unchecked")} key={note.id}>

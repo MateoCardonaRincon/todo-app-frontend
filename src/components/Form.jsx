@@ -53,7 +53,7 @@ const Form = () => {
             <input className="form-control" type="text" name="title" onChange={addTitle} />
             <label className="form-label">Message:</label>
             <input className="form-control" type="text" name="message" onChange={addMessage} />
-            <button className="add-btn" onClick={onAdd}>Add note</button>
+            <button className="add-btn" onClick={onAdd}>Add</button>
         </form>
     )
 }
