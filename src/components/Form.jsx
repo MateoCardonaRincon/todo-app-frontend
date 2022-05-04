@@ -48,7 +48,7 @@ const Form = () => {
     }
 
     return (
-        <form class="form" ref={formRef}>
+        <form className="form" ref={formRef}>
             <label className="form-label">Title:</label>
             <input className="form-control" type="text" name="title" onChange={addTitle} />
             <label className="form-label">Message:</label>
