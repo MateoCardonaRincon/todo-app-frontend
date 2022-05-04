@@ -1,8 +1,6 @@
 const reducer = (state, action) => {
     switch (action.type) {
         case "add-note":
-            console.log("Validating add-note case in the reducer")
-
             const newNote = {
                 id: Math.floor(Math.random() * 100),
                 title: action.payload.title,
@@ -11,12 +9,29 @@ const reducer = (state, action) => {
             }
 
             const newListOfNotes = [...state.listOfNotes, newNote]
-            const newState = { ...state, listOfNotes: newListOfNotes }
-            return newState
+
+            const stateAfterAddNote = { ...state, listOfNotes: newListOfNotes }
+
+            return stateAfterAddNote
+
         case "remove-note":
-            return state
+            const noteToDelete = action.payload
+
+            const listOfNotesAfterDelete = state.listOfNotes.filter((note) => note.id !== noteToDelete.id)
+
+            const stateAfterDeleteNote = { ...state, listOfNotes: listOfNotesAfterDelete }
+
+            return stateAfterDeleteNote
+
         case "update-note":
-            return state
+            const updatedNote = action.payload
+
+            const updatedListOfNotes = state.listOfNotes.map(
+                (note) => note.id === updatedNote.id ? updatedNote : note)
+
+            const stateAfterUpdateNote = { ...state, listOfNotes: updatedListOfNotes }
+
+            return stateAfterUpdateNote
     }
 }
 
