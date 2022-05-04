@@ -33,6 +33,7 @@ const ToDoList = () => {
 
         const noteUpdatedFromForm = { ...note, done: isChecked }
 
+        // promises are treated using async/await and .then() approaches
         let noteUpdated = await fetch("http://localhost:8081/api/update/note", {
             method: "PUT",
             headers: {
@@ -46,8 +47,15 @@ const ToDoList = () => {
 
     // this event triggers the remove-note case in the dispatcher, removing the note by id
     // out of the listOfNotes property of the context state
-    const onDelete = (e, note) => {
-        dispatch({ type: "remove-note", payload: { ...note } })
+    const onDelete = async (e, note) => {
+
+        let response = await fetch(`http://localhost:8081/api/delete/note/${note.id}`, { method: "DELETE" });
+
+        // checks if the note was succesfully deleted on the DB, if so, the dispatch is triggered
+        if (response.status === 200) {
+            dispatch({ type: "remove-note", payload: { ...note } })
+        }
+
     }
 
     return (
