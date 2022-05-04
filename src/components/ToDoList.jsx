@@ -63,11 +63,11 @@ const ToDoList = () => {
             <h3>Pending tasks</h3>
             <ul>
                 {state.listOfNotes.map(note => {
-                    return <li key={note.id} style={note.done ? { textDecoration: 'line-through' } : {}}>
-                        {note.title} <br />
-                        {note.message} <br />
-                        <input type="checkbox" checked={note.done} onChange={(e) => onCheckbox(e, note)} />
-                        <button style={{ backgroundColor: "red" }} onClick={(e) => onDelete(e, note)}>✖</button>
+                    return <li className={"note " + (note.done ? "checked" : "unchecked")} key={note.id}>
+                        <input className="checkbox" type="checkbox" checked={note.done} onChange={(e) => onCheckbox(e, note)} />
+                        <h4>{note.title}</h4>
+                        <span>{note.message}</span>
+                        <button className="delete-btn" onClick={(e) => onDelete(e, note)}>✖</button>
                     </li>
                 })}
             </ul>

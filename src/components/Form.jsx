@@ -48,12 +48,12 @@ const Form = () => {
     }
 
     return (
-        <form ref={formRef}>
-            <label>Title:</label>
-            <input type="text" name="title" onChange={addTitle} />
-            <label>Message:</label>
-            <input type="text" name="message" onChange={addMessage} />
-            <button onClick={onAdd}>Add note</button>
+        <form class="form" ref={formRef}>
+            <label className="form-label">Title:</label>
+            <input className="form-control" type="text" name="title" onChange={addTitle} />
+            <label className="form-label">Message:</label>
+            <input className="form-control" type="text" name="message" onChange={addMessage} />
+            <button className="add-btn" onClick={onAdd}>Add note</button>
         </form>
     )
 }
