@@ -1,22 +1,22 @@
 // This is the reducer function that is triggered by the context dispatcher
-// It reduce the dispatch call to one of three cases: for add, delete or update a note,
+// Reduces the dispatch call to one of three cases: for get all notes from the DB, add, delete or update a note,
 // updating the context state by modifing the listOfNotes property of the state
 
 const reducer = (state, action) => {
     switch (action.type) {
+
+        // fetched list of nodes is passed through the action.payload,
+        // and stored in the context state using the spread operator
         case "get-notes":
 
             const stateWithfetchedNotes = { ...state, listOfNotes: action.payload }
 
             return stateWithfetchedNotes
 
+        // as the post request returns the created object, this response is sent through the action.payload
+        // to update the listOfNodes in the state of the context
         case "add-note":
-            const newNote = {
-                id: Math.floor(Math.random() * 100),
-                title: action.payload.title,
-                message: action.payload.message,
-                done: false
-            }
+            const newNote = action.payload
 
             const newListOfNotes = [...state.listOfNotes, newNote]
 
@@ -24,6 +24,7 @@ const reducer = (state, action) => {
 
             return stateAfterAddNote
 
+        //
         case "remove-note":
             const noteToDelete = action.payload
 

@@ -18,29 +18,41 @@ const Form = () => {
     const addTitle = (event) => {
         setTitle(event.target.value)
     }
-    
+
     // set the value of the message through the useState hook, taking the onChange event value
     const addMessage = (event) => {
         setMessage(event.target.value)
     }
 
     // Triggers the dispatch when add a new note with not empty title and message
-    const onAdd = (event) => {
+    const onAdd = async (event) => {
         event.preventDefault();
-        if (title && message) {
-            dispatch({ type: "add-note", payload: { title, message } })
-        }
 
-        // Reset input values of the Form component   
-        formRef.current.reset()
+        if (title && message) {
+
+            const noteFromForm = { title, message, done: false }
+
+            let noteSaved = await fetch("http://localhost:8081/api/save/note", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(noteFromForm)
+            }).then(response => response.json());
+
+            dispatch({ type: "add-note", payload: noteSaved })
+
+            // Reset input values of the Form component   
+            formRef.current.reset()
+        }
     }
 
     return (
         <form ref={formRef}>
             <label>Title:</label>
-            <input type="text" name="title" onChange={addTitle}/>
+            <input type="text" name="title" onChange={addTitle} />
             <label>Message:</label>
-            <input type="text" name="message" onChange={addMessage}/>
+            <input type="text" name="message" onChange={addMessage} />
             <button onClick={onAdd}>Add note</button>
         </form>
     )

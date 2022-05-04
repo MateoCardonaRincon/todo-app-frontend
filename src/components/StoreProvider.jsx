@@ -9,20 +9,7 @@ const initialState = {
         message: "",
         done: false
     },
-    listOfNotes: [
-        {
-            id: 0,
-            title: "Default Title",
-            message: "Default message",
-            done: true
-        },
-        {
-            id: 1,
-            title: "Other Title",
-            message: "Other message",
-            done: false
-        }
-    ],
+    listOfNotes: [],
 }
 
 // Setting the initialState as a context state

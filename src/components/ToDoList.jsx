@@ -6,6 +6,9 @@ const ToDoList = () => {
     // call to the context state and dispatch
     const { state, dispatch } = useContext(Store)
 
+
+    // Gets all the notes stored in the database before the component is rendered
+    // Then, triggers the dispatch, setting these notes as the new listOfNote of the context state
     useEffect(() => {
         let listOfNotes = fetchAllNotes().then(
             notes => {
@@ -17,6 +20,7 @@ const ToDoList = () => {
             })
     }, [])
 
+    // useEffect callback function to fetch the API with all the notes
     const fetchAllNotes = async () => {
         let response = await fetch("http://localhost:8081/api/get/notes")
         let data = await response.json()
