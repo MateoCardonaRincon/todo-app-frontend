@@ -1,5 +1,15 @@
+// This is the reducer function that is triggered by the context dispatcher
+// It reduce the dispatch call to one of three cases: for add, delete or update a note,
+// updating the context state by modifing the listOfNotes property of the state
+
 const reducer = (state, action) => {
     switch (action.type) {
+        case "get-notes":
+
+            const stateWithfetchedNotes = { ...state, listOfNotes: action.payload }
+
+            return stateWithfetchedNotes
+
         case "add-note":
             const newNote = {
                 id: Math.floor(Math.random() * 100),

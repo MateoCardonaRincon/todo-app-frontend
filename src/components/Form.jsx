@@ -3,25 +3,35 @@ import { Store } from '/src/components/StoreProvider'
 
 const Form = () => {
 
+    // useRef hook to clean the inputs after adding a note
     const formRef = useRef(null)
+
+    // useState hook to control the states of the two inputs in the Form component
     const [title, setTitle] = useState('')
     const [message, setMessage] = useState('')
+
+    // call the context state and the dispatcher to update the state after
+    // add, update and delete events
     const { state, dispatch } = useContext(Store)
 
+    // set the value of the title through the useState hook, taking the onChange event value
     const addTitle = (event) => {
         setTitle(event.target.value)
     }
-
+    
+    // set the value of the message through the useState hook, taking the onChange event value
     const addMessage = (event) => {
         setMessage(event.target.value)
     }
 
+    // Triggers the dispatch when add a new note with not empty title and message
     const onAdd = (event) => {
         event.preventDefault();
         if (title && message) {
             dispatch({ type: "add-note", payload: { title, message } })
         }
-        
+
+        // Reset input values of the Form component   
         formRef.current.reset()
     }
 
